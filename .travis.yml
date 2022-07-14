@@ -16,10 +16,10 @@ before_script:
 script:
   - docker --version # print the version for logging
   - docker-compose -f docker-compose-build.yaml build --parallel
-  - docker tag udagram-api-user golf4sp/udagram-api-user:v1
-  - docker tag udagram-api-feed golf4sp/udagram-api-feed:v1
-  - docker tag udagram-api-reverseproxy golf4sp/udagram-reverseproxy:v1
-  - docker tag udagram-frontend golf4sp/udagram-frontend:v1
+  - docker tag udagram-api-user golf4sp/udagram-api-user:v2
+  - docker tag udagram-api-feed golf4sp/udagram-api-feed:v2
+  - docker tag udagram-api-reverseproxy golf4sp/udagram-reverseproxy:v2
+  - docker tag udagram-frontend golf4sp/udagram-frontend:v2
 
 # Tasks to perform after the process is successful. 
 # Formatting the Docker username and password as below enables you to 
