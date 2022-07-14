@@ -11,9 +11,12 @@ KUBERNETES COMMANDS TO NOTES
 - kubectl apply -f deployment-reverseproxy.yaml -f deployment-user.yaml -f deployment-feed.yaml -f deployment-frontend.yaml
 - kubectl apply -f service-reverseproxy.yaml -f service-user.yaml -f service-feed.yaml -f service-frontend.yaml
 - kubectl apply -f env-configmap.yaml -f env-secret.yaml -f aws-secret.yaml
+- kubectl rollout restart deployment/frontend 
+- kubectl rollout status -w deployment/frontend - # Watch rolling update status of "frontend" deployment until completion
 
 Get Kubernetes nodes, deployment, services, pods, hpa
 - kubectl get nodes,secrets,deployments,services,pods,hpa
+- kubectl get hpa reverseproxy-deployment --watch
 
 Delete deployment, services, pods where label.app=<label>
 - kubectl delete deployments,services,pods -l app=udagram-frontend
@@ -24,7 +27,7 @@ Delete deployment, services, pods where label.app=<label>
 - kubectl expose deployment hello-world --type=LoadBalancer --name=my-service
 - kubectl set image deployment frontend-deployment frontend=golf4sp/udagram-frontend:v2
 - kubectl autoscale deployment reverseproxy-deployment --cpu-percent=50 --min=1 --max=4
-
+- kubectl run -i --tty load-generator --rm --image=busybox:1.28 --restart=Never -- /bin/sh -c "while sleep 0.01; do wget -q -O- https://ab27d2ad91d7e4142b42b53ec1799459-870958880.us-east-1.elb.amazonaws.com/api/v0/feed; done"
 
 Other Notes
 ------
